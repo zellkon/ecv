@@ -5,7 +5,7 @@ var multer  = require('multer');
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, '../public/upload')
+    cb(null, './public/upload')
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + '_' + file.originalname);
@@ -60,7 +60,7 @@ router.post('/them-product.html', checkLogin, upload.single('hinh'), function (r
 	console.log(req.file);
     var errors = req.validationErrors();
 	if (errors) {
-		var file = '../public/upload/' + req.file.filename;
+		var file = './public/upload/' + req.file.filename;
 		  var fs = require('fs');
 			fs.unlink(file, function(e){
 				if(e) throw e;
@@ -104,7 +104,7 @@ router.post('/:id/sua-product.html',  upload.single('hinh'), function (req, res)
     var errors = req.validationErrors();
 	if (errors) {
 		
-		var file = '../public/upload/' + req.file.filename;
+		var file = './public/upload/' + req.file.filename;
 		var fs = require('fs');
 		fs.unlink(file, function(e){
 			if(e) throw e;
@@ -117,7 +117,7 @@ router.post('/:id/sua-product.html',  upload.single('hinh'), function (req, res)
 		});
 	}else{
 		Product.findOne({ _id: req.params.id},  function(err, data){
-			var file = '../public/upload/' + data.img;
+			var file = './public/upload/' + data.img;
 			var fs = require('fs');
 			fs.unlink(file, function(e){
 				if(e) throw e;
@@ -146,7 +146,7 @@ router.get('/:id/xoa-product.html', checkLogin,  function (req, res) {
 
 
 	Product.findById(req.params.id, function(err, data){
-		var file = '../public/upload/' + data.img;
+		var file = './public/upload/' + data.img;
 		var fs = require('fs');
 		fs.unlink(file, function(e){
 			if(e) throw e;
